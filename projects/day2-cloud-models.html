@@ -1,0 +1,113 @@
+<!-- ec2-simulator.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EC2 Launch Simulator</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #eef6f9;
+      padding: 2rem;
+      text-align: center;
+    }
+    form {
+      background-color: #fff;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      padding: 2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #ff9900;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    select, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #ff9900;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 1rem;
+      background-color: #fef3c7;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🖥️ EC2 Launch Simulator</h1>
+
+<form id="ec2Form">
+  <label>Select AMI (OS):</label>
+  <select id="ami">
+    <option>Amazon Linux 2</option>
+    <option>Ubuntu 22.04</option>
+    <option>Windows Server 2022</option>
+  </select>
+
+  <label>Select Instance Type:</label>
+  <select id="type">
+    <option>t2.micro (Free Tier)</option>
+    <option>t3.small</option>
+    <option>t3.medium</option>
+  </select>
+
+  <label>Select Region:</label>
+  <select id="region">
+    <option>us-east-1</option>
+    <option>ap-south-1 (Mumbai)</option>
+    <option>eu-west-1 (Ireland)</option>
+  </select>
+
+  <label>Enter Key Pair Name:</label>
+  <input type="text" id="keypair" placeholder="my-keypair" required>
+
+  <label>Storage (GB):</label>
+  <input type="number" id="storage" value="8" min="8" max="100">
+
+  <button type="submit">Simulate Launch</button>
+</form>
+
+<div id="output"></div>
+
+<script>
+  const form = document.getElementById("ec2Form");
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const ami = document.getElementById("ami").value;
+    const type = document.getElementById("type").value;
+    const region = document.getElementById("region").value;
+    const keypair = document.getElementById("keypair").value;
+    const storage = document.getElementById("storage").value;
+
+    document.getElementById("output").innerHTML = `
+      <h3>🎉 EC2 Instance Configuration</h3>
+      <p><strong>AMI:</strong> ${ami}</p>
+      <p><strong>Instance Type:</strong> ${type}</p>
+      <p><strong>Region:</strong> ${region}</p>
+      <p><strong>Key Pair:</strong> ${keypair}</p>
+      <p><strong>Storage:</strong> ${storage} GB</p>
+    `;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!-- s3-simulator.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>S3 Bucket Upload Simulator</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #f0f4f8;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      color: #ff9900;
+    }
+    #uploadArea {
+      border: 2px dashed #ccc;
+      padding: 30px;
+      border-radius: 10px;
+      background-color: #fff;
+      margin-top: 20px;
+    }
+    #fileList {
+      margin-top: 20px;
+      text-align: left;
+    }
+    table {
+      margin: auto;
+      width: 80%;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #eee;
+    }
+    th {
+      background-color: #ff9900;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h1>☁️ S3 Bucket Upload Simulator</h1>
+
+<label><strong>Bucket Name:</strong></label>
+<input type="text" id="bucketName" placeholder="my-demo-bucket" value="my-demo-bucket">
+<br><br>
+
+<input type="file" id="fileInput" multiple>
+
+<div id="uploadArea">
+  <p>Drag & Drop files here or use the input above</p>
+</div>
+
+<h2>Uploaded Files</h2>
+<table id="fileList">
+  <thead>
+    <tr>
+      <th>File Name</th>
+      <th>Size (KB)</th>
+      <th>Storage Class</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  const fileInput = document.getElementById("fileInput");
+  const fileListBody = document.querySelector("#fileList tbody");
+
+  function displayFiles(files) {
+    for (const file of files) {
+      const row = document.createElement("tr");
+
+      const nameCell = document.createElement("td");
+      nameCell.textContent = file.name;
+
+      const sizeCell = document.createElement("td");
+      sizeCell.textContent = (file.size / 1024).toFixed(2);
+
+      const classCell = document.createElement("td");
+      classCell.textContent = "STANDARD";
+
+      row.appendChild(nameCell);
+      row.appendChild(sizeCell);
+      row.appendChild(classCell);
+
+      fileListBody.appendChild(row);
+    }
+  }
+
+  fileInput.addEventListener("change", () => {
+    const files = fileInput.files;
+    displayFiles(files);
+  });
+
+  const uploadArea = document.getElementById("uploadArea");
+
+  uploadArea.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    uploadArea.style.backgroundColor = "#e3f2fd";
+  });
+
+  uploadArea.addEventListener("dragleave", () => {
+    uploadArea.style.backgroundColor = "#fff";
+  });
+
+  uploadArea.addEventListener("drop", (e) => {
+    e.preventDefault();
+    uploadArea.style.backgroundColor = "#fff";
+    const files = e.dataTransfer.files;
+    displayFiles(files);
+  });
+</script>
+
+</body>
+</html>

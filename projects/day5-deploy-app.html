@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IAM User Simulator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f6fa;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      color: #ff9900;
+    }
+    .section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    input, select {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ff9900;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #ff9900;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🔐 IAM User Simulator</h1>
+
+<div class="section">
+  <input type="text" id="username" placeholder="Enter IAM Username">
+
+  <label><strong>Select Group:</strong></label>
+  <select id="group">
+    <option value="Admins">Admins</option>
+    <option value="Developers">Developers</option>
+    <option value="Auditors">Auditors</option>
+  </select>
+
+  <label><strong>Attach Policy:</strong></label>
+  <select id="policy">
+    <option value="AdministratorAccess">AdministratorAccess</option>
+    <option value="AmazonS3ReadOnlyAccess">AmazonS3ReadOnlyAccess</option>
+    <option value="AmazonEC2FullAccess">AmazonEC2FullAccess</option>
+    <option value="AmazonDynamoDBReadOnlyAccess">AmazonDynamoDBReadOnlyAccess</option>
+  </select>
+
+  <button onclick="createUser()">Create IAM User</button>
+</div>
+
+<div class="section">
+  <h2>👥 IAM Users</h2>
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Group</th>
+        <th>Policy</th>
+        <th>Access Key</th>
+        <th>Secret Key</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+  function generateKey(length = 20) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    return Array.from({ length }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+  }
+
+  function createUser() {
+    const name = document.getElementById("username").value.trim();
+    const group = document.getElementById("group").value;
+    const policy = document.getElementById("policy").value;
+
+    if (name === "") {
+      alert("Please enter a username.");
+      return;
+    }
+
+    const accessKey = "AKIA" + generateKey(16);
+    const secretKey = generateKey(40);
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${name}</td>
+      <td>${group}</td>
+      <td>${policy}</td>
+      <td>${accessKey}</td>
+      <td>${secretKey}</td>
+    `;
+
+    document.querySelector("#userTable tbody").appendChild(row);
+    document.getElementById("username").value = "";
+  }
+</script>
+
+</body>
+</html>
