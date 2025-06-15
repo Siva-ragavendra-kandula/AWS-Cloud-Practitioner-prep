@@ -1,100 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AWS Cloud Practitioner Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siva Ragavendra Kandula | Cloud & DevOps Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+        .main-container {
+            position: relative;
+        }
+        .sticky-container {
+            height: 100vh;
+            width: 100vw;
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            filter: brightness(0.3) blur(4px);
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+        .background-image.active {
+            opacity: 1;
+        }
+        .scroll-track {
+            position: relative;
+            width: 100%;
+            z-index: 10;
+        }
+        .panel-placeholder {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+        }
+        .content-card {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            max-width: 1000px;
+            width: 90%;
+            text-align: left;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .content-card.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .day-indicator {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-size: 5rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.05);
+            z-index: 0;
+        }
+        .side-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-dot:hover {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .nav-dot.active {
+            background-color: #5EEAD4;
+            transform: scale(1.4);
+            border: 2px solid rgba(0,0,0,0.5);
+        }
+        .progress-bar-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255,255,255,0.1);
+            z-index: 50;
+        }
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #5EEAD4, #A78BFA);
+            transition: width 0.3s ease-out;
+        }
+        .loader {
+            border: 4px solid #444;
+            border-top: 4px solid #5EEAD4;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
 </head>
-<body>
+<body class="antialiased">
 
-<header>
-  <h1>☁️ AWS Cloud Practitioner Portfolio</h1>
-  <p>By <strong>Siva Ragavendra Kandula</strong> | 15-Day Challenge</p>
-</header>
+    <header class="bg-black/50 backdrop-blur-md shadow-lg fixed top-0 w-full z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white tracking-wider">SIVA</a>
+            <div id="main-nav" class="hidden md:flex items-center space-x-8">
+                <a href="#about" data-target-id="about" class="text-gray-300 hover:text-cyan-300 transition-colors">About</a>
+                <a href="#challenge" data-target-id="challenge" class="text-gray-300 hover:text-cyan-300 transition-colors">Challenge</a>
+                <a href="#next-steps" data-target-id="next-steps" class="text-gray-300 hover:text-cyan-300 transition-colors">Next Steps</a>
+                <a href="#contact" data-target-id="contact" class="text-gray-300 hover:text-cyan-300 transition-colors">Contact</a>
+            </div>
+            <a href="https://www.linkedin.com/in/siva-ragavendra-kandula/" target="_blank" class="hidden md:inline-block bg-cyan-400 text-black font-bold px-5 py-2 rounded-full hover:bg-cyan-300 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(100,220,255,0.4)]">
+                LinkedIn <i class="fab fa-linkedin ml-1"></i>
+            </a>
+        </nav>
+    </header>
 
-<main class="grid">
+    <div class="main-container">
+        <div class="sticky-container">
+            <div id="background-container"></div>
+            <div id="sticky-content" class="relative">
+                 <div class="day-indicator" id="content-day-indicator"></div>
+                 <div class="content-card" id="content-card"></div>
+            </div>
+        </div>
+        <div class="scroll-track"></div>
+    </div>
+    
+    <div class="side-nav" id="side-nav"></div>
+    <div class="progress-bar-container"><div id="progress-bar"></div></div>
 
-  <a href="projects/day1-intro-to-aws.html" class="card">
-    <h2>Day 1</h2>
-    <p>What is Cloud? AWS Overview with Benefits</p>
-  </a>
+    <div id="ai-chat-modal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex justify-center items-center z-[100] hidden">
+        <div class="bg-black/50 border border-gray-700 backdrop-blur-xl rounded-lg shadow-2xl w-11/12 max-w-2xl flex flex-col" style="height: 75vh; max-height: 800px;">
+            <div class="p-4 border-b border-gray-700 flex justify-between items-center">
+                <h3 id="modal-title" class="text-lg font-bold text-white">Ask about the project</h3>
+                <button id="close-modal-btn" class="text-2xl text-gray-400 hover:text-white">&times;</button>
+            </div>
+            <div id="chat-window" class="p-6 flex-grow overflow-y-auto space-y-4"></div>
+            <div class="p-4 border-t border-gray-700">
+                <form id="chat-form" class="flex items-center">
+                    <input type="text" id="chat-input" placeholder="e.g., What was the biggest challenge?" class="w-full px-4 py-2 border border-gray-600 bg-gray-800 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-400" autocomplete="off">
+                    <button type="submit" class="ml-3 bg-cyan-400 text-black font-semibold px-5 py-2 rounded-full hover:bg-cyan-300 flex items-center justify-center w-24">
+                        <span class="send-text">Send</span>
+                        <span class="chat-spinner hidden"><div class="loader !w-5 !h-5 !border-2"></div></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-  <a href="projects/day2-cloud-models.html" class="card">
-    <h2>Day 2</h2>
-    <p>IaaS vs PaaS vs SaaS Visual Explainer</p>
-  </a>
+    <script>
+        const projectData = [
+            { id: 'hero', isSection: true, title: 'Siva R. Kandula', imageUrl: 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2070&auto=format&fit=crop', details: `<div class="text-center"><img src="https://siva-ragavendra-kandula.github.io/AWS-Cloud-Practitioner-prep/images/siva.png" onerror="this.onerror=null; this.src='https://placehold.co/160x160/1a1a1a/ffffff?text=Siva';" alt="Siva Ragavendra Kandula" class="w-32 h-32 rounded-full mx-auto mb-6 shadow-2xl border-4 border-gray-700"><h1 class="text-5xl md:text-6xl font-black text-white uppercase tracking-wider mb-4">Siva R. Kandula</h1><p class="max-w-4xl mx-auto text-xl md:text-2xl text-gray-300 mt-4 font-light">Cloud & DevOps Engineer Architecting the Future of Resilient Infrastructure.</p><div class="mt-12"><span class="text-white text-lg">Scroll to explore my 15-day AWS journey</span><div class="mt-2 text-3xl animate-bounce"><i class="fas fa-chevron-down"></i></div></div></div>` },
+            { id: 'about', isSection: true, title: 'About Me', imageUrl: 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=2070&auto=format&fit=crop', details: `<h2 class="text-3xl font-bold text-center mb-8 text-white">About Me</h2><p class="text-lg text-gray-300 leading-relaxed text-center">I am a passionate cloud enthusiast and a recent graduate with a Master of Science in Computer and Information Sciences from the University of South Alabama. This portfolio showcases my dedication and hands-on experience with core AWS services, gained through an intensive 15-day challenge. My goal is to leverage these skills to build and manage scalable, secure, and cost-effective cloud solutions.</p>` },
+            { id: 'challenge', isSection: true, title: '15-Day AWS Challenge', imageUrl: 'https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop', details: `<h2 class="text-4xl md:text-5xl font-bold text-white text-center">15-Day AWS Challenge</h2><p class="text-lg text-gray-400 mt-2 text-center">The following section details my hands-on projects. Scroll to continue.</p>` },
+            { day: 1, fileName: 'projects/day1-intro-to-aws.html', title: 'Foundational IaaS: EC2 & S3', desc: 'Deployed a scalable EC2 instance to serve a static website, with assets stored and delivered globally via S3 for high availability.', technologies: 'EC2, S3, IAM', imageUrl: 'https://images.unsplash.com/photo-1593349480503-64d47a3237f3?q=80&w=2070&auto=format&fit=crop' },
+            { day: 2, fileName: 'Day2.md', title: 'Fine-Grained Access Control with IAM', desc: 'Established a robust security posture by creating IAM users, groups, and policies based on the principle of least privilege.', technologies: 'IAM, JSON Policies, MFA', imageUrl: 'https://images.unsplash.com/photo-1593349480503-64d47a3237f3?q=80&w=2070&auto=format&fit=crop' },
+            { day: 3, fileName: 'Day3.md', title: 'Architecting for Elastic Compute (EC2)', desc: 'Designed and documented a visual architecture for scalable and fault-tolerant compute solutions using various EC2 instance types.', technologies: 'EC2, Auto Scaling, ELB', imageUrl: 'https://images.unsplash.com/photo-1593349480503-64d47a3237f3?q=80&w=2070&auto=format&fit=crop' },
+            { day: 4, fileName: 'Day4.md', title: 'Data Persistence with Amazon S3', desc: 'Created an infographic detailing S3 storage classes, versioning, and lifecycle policies for cost-optimized data management.', technologies: 'S3, Lifecycle Policies', imageUrl: 'https://images.unsplash.com/photo-1621442342258-5781699545a2?q=80&w=1974&auto=format&fit=crop' },
+            { day: 5, fileName: 'Day5.md', title: 'S3 Static Website Hosting & Delivery', desc: 'Configured a secure, cost-effective static website hosting solution on S3 with a custom bucket policy for public access.', technologies: 'S3, Bucket Policies, Route 53', imageUrl: 'https://images.unsplash.com/photo-1621442342258-5781699545a2?q=80&w=1974&auto=format&fit=crop' },
+            { day: 6, fileName: 'Day6.md', title: 'Cloud Database Strategy', desc: 'Developed a comparative analysis of AWS managed database services (RDS, DynamoDB) to inform architectural decisions.', technologies: 'RDS, DynamoDB, Redshift', imageUrl: 'https://images.unsplash.com/photo-1521185496955-15097b20c5fe?q=80&w=1950&auto=format&fit=crop' },
+            { day: 7, fileName: 'Day7.md', title: 'Managed Relational Database with RDS', desc: 'Provisioned and secured a managed MySQL database instance with RDS, including network configuration and access control.', technologies: 'RDS, MySQL, Security Groups', imageUrl: 'https://images.unsplash.com/photo-1521185496955-15097b20c5fe?q=80&w=1950&auto=format&fit=crop' },
+            { day: 8, fileName: 'Day8.md', title: 'Network Isolation with Amazon VPC', desc: 'Designed a conceptual network topology using VPC, outlining subnets, routing, and security layers for a private cloud environment.', technologies: 'VPC, Subnets, Route Tables', imageUrl: 'https://images.unsplash.com/photo-1587185712683-0824b33b3a69?q=80&w=1964&auto=format&fit=crop' },
+            { day: 9, fileName: 'Day9.md', title: 'Custom VPC Implementation', desc: 'Built a multi-tier, isolated network infrastructure from scratch with custom routing, public/private subnets, and an internet gateway.', technologies: 'VPC, NAT Gateway, NACLs', imageUrl: 'https://images.unsplash.com/photo-1587185712683-0824b33b3a69?q=80&w=1964&auto=format&fit=crop' },
+            { day: 10, fileName: 'Day10.md', title: 'Infrastructure as Code with CloudFormation', desc: 'Automated the provisioning of a multi-resource stack (S3, EC2) using a declarative CloudFormation template for repeatability.', technologies: 'CloudFormation, YAML', imageUrl: 'https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop' },
+            { day: 11, fileName: 'Day11.md', title: 'Serverless API with Lambda & API Gateway', desc: 'Implemented a RESTful serverless API endpoint that triggers a Python-based Lambda function, demonstrating event-driven architecture.', technologies: 'Lambda, API Gateway, Python', imageUrl: 'https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1887&auto=format&fit=crop' },
+            { day: 12, fileName: 'Day12.md', title: 'Proactive Monitoring with CloudWatch', desc: 'Established a monitoring and alerting system for an EC2 instance by creating custom CloudWatch alarms and a centralized dashboard.', technologies: 'CloudWatch, SNS', imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop' },
+            { day: 13, fileName: 'Day13.md', title: 'DNS Management with Route 53', desc: 'Configured a custom domain to resolve to a cloud resource by managing DNS records and routing policies within Route 53.', technologies: 'Route 53, DNS Records', imageUrl: 'https://images.unsplash.com/photo-1545156521-77bd85671d30?q=80&w=2070&auto=format&fit=crop' },
+            { day: 14, fileName: 'Day 14.md', title: 'Cloud Security Posture Management', desc: 'Conducted a security audit using AWS Trusted Advisor and documented best practices based on the Shared Responsibility Model.', technologies: 'Trusted Advisor, IAM Analyzer', imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop' },
+            { day: 15, fileName: 'Day 15.md', title: 'Resilient Web Application Architecture', desc: 'Designed and documented a final, integrated solution combining multiple AWS services to create a small, resilient web application.', technologies: 'EC2, RDS, S3, VPC', imageUrl: 'https://images.unsplash.com/photo-1620228831165-742939a88884?q=80&w=2071&auto=format&fit=crop' },
+            { id: 'next-steps', isSection: true, title: 'Career Growth Engine', imageUrl: 'https://images.unsplash.com/photo-1593349480503-64d47a3237f3?q=80&w=2070&auto=format&fit=crop', details: `<div class="text-center"><h2 class="text-4xl md:text-5xl font-bold text-white">Career Growth Engine</h2><p class="text-lg text-gray-400 mt-2">Use AI to generate personalized next steps for your cloud career path.</p><div class="max-w-2xl mx-auto text-center mt-8"><button id="suggest-steps-btn" class="bg-gradient-to-r from-pink-500 to-orange-400 text-white font-bold px-8 py-3 rounded-full hover:opacity-90 transition-all transform hover:scale-105 shadow-2xl shadow-pink-500/20"><i class="fas fa-magic mr-2"></i> Suggest My Next Learning Path</button><div id="next-steps-spinner" class="mt-8 justify-center hidden"><div class="loader"></div></div><div id="next-steps-result" class="mt-8 text-left bg-black/30 p-8 rounded-2xl hidden prose prose-invert lg:prose-lg"></div></div></div>` },
+            { id: 'contact', isSection: true, title: 'Contact', imageUrl: 'https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2070&auto=format&fit=crop', details: `<div class="text-center"><h2 class="text-3xl font-bold mb-4 text-white">Get In Touch</h2><p class="max-w-md mx-auto mb-8 text-gray-400">I'm seeking new opportunities. Let's connect!</p><div class="flex justify-center space-x-8 text-4xl"><a href="https://www.linkedin.com/in/siva-ragavendra-kandula/" target="_blank" class="text-gray-400 hover:text-cyan-300 transition-all transform hover:scale-110"><i class="fab fa-linkedin"></i></a><a href="https://github.com/siva-ragavendra-kandula" target="_blank" class="text-gray-400 hover:text-purple-400 transition-all transform hover:scale-110"><i class="fab fa-github"></i></a></div><p class="mt-10 text-gray-500">&copy; 2024 Siva Ragavendra Kandula. All Rights Reserved.</p></div>` }
+        ];
 
-  <a href="projects/day3-global-infra.html" class="card">
-    <h2>Day 3</h2>
-    <p>AWS Regions, AZs & Edge Locations Visualizer</p>
-  </a>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollTrack = document.querySelector('.scroll-track');
+            const sideNav = document.getElementById('side-nav');
+            const stickyContentCard = document.getElementById('content-card');
+            const contentDayIndicator = document.getElementById('content-day-indicator');
+            const progressBar = document.getElementById('progress-bar');
+            const backgroundContainer = document.getElementById('background-container');
+            const mainNav = document.getElementById('main-nav');
+            const aiChatModal = document.getElementById('ai-chat-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            const chatWindow = document.getElementById('chat-window');
+            const modalTitle = document.getElementById('modal-title');
+            
+            let lastActivePanel = -1;
+            let backgroundElements = [];
+            let panels = [];
+            let projectContext = '';
 
-  <a href="projects/day4-core-services.html" class="card">
-    <h2>Day 4</h2>
-    <p>Core AWS Services Mini Cards (EC2, S3, RDS)</p>
-  </a>
+            projectData.forEach((project, index) => {
+                const panel = document.createElement('div');
+                panel.className = 'panel-placeholder';
+                panel.dataset.index = index;
+                if(project.id) panel.id = project.id;
+                scrollTrack.appendChild(panel);
+                panels.push(panel);
 
-  <a href="projects/day5-deploy-app.html" class="card">
-    <h2>Day 5</h2>
-    <p>Deploy Static App on AWS (Simulated)</p>
-  </a>
+                const navDot = document.createElement('div');
+                navDot.className = 'nav-dot';
+                navDot.dataset.index = index;
+                navDot.addEventListener('click', () => panel.scrollIntoView({ behavior: 'smooth' }));
+                sideNav.appendChild(navDot);
+                
+                const bgDiv = document.createElement('div');
+                bgDiv.className = 'background-image';
+                bgDiv.style.backgroundImage = `url(${project.imageUrl})`;
+                bgDiv.dataset.index = index;
+                backgroundContainer.appendChild(bgDiv);
+                backgroundElements.push(bgDiv);
+            });
+            
+            const navDots = document.querySelectorAll('.nav-dot');
+            
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const panelIndex = parseInt(entry.target.dataset.index);
+                        if(panelIndex === lastActivePanel) return;
+                        lastActivePanel = panelIndex;
+                        
+                        updateContent(panelIndex);
+                        
+                        navDots.forEach(dot => dot.classList.remove('active'));
+                        if(navDots[panelIndex]) navDots[panelIndex].classList.add('active');
 
-  <a href="projects/day6-ec2-simulator.html" class="card">
-    <h2>Day 6</h2>
-    <p>EC2 Launch & Cost Estimator</p>
-  </a>
+                        const progress = (panelIndex / (projectData.length - 1)) * 100;
+                        progressBar.style.width = `${progress}%`;
+                        
+                        backgroundElements.forEach((bg, idx) => bg.classList.toggle('active', idx === panelIndex));
+                    }
+                });
+            }, { threshold: 0.5 });
 
-  <a href="projects/day7-s3-dashboard.html" class="card">
-    <h2>Day 7</h2>
-    <p>S3 Bucket Manager & Lifecycle Rules</p>
-  </a>
+            async function updateContent(index) {
+                const data = projectData[index];
+                stickyContentCard.classList.remove('is-visible');
 
-  <a href="projects/day8-lambda-ui.html" class="card">
-    <h2>Day 8</h2>
-    <p>AWS Lambda Visual Trigger Simulator</p>
-  </a>
+                await new Promise(resolve => setTimeout(resolve, 350));
 
-  <a href="projects/day9-cloudfront-demo.html" class="card">
-    <h2>Day 9</h2>
-    <p>CDN Explainer – CloudFront Distribution Visual</p>
-  </a>
+                if(data.isSection) {
+                    contentDayIndicator.textContent = '';
+                    stickyContentCard.innerHTML = data.details;
+                    stickyContentCard.classList.add('text-center');
+                } else {
+                    contentDayIndicator.textContent = `Day ${data.day}`;
+                    stickyContentCard.classList.remove('text-center');
+                    stickyContentCard.innerHTML = `
+                         <div class="flex flex-col md:flex-row md:items-start md:space-x-8">
+                            <div class="flex-1">
+                                <p class="text-xl text-teal-300 mb-2 font-semibold">Day ${data.day}</p>
+                                <h2 class="text-3xl font-bold text-white mb-4">${data.title}</h2>
+                                <p class="text-slate-300 mb-6">${data.desc}</p>
+                                 <div class="flex flex-wrap items-center gap-4">
+                                    <a href="https://github.com/siva-ragavendra-kandula/AWS-Cloud-Practitioner-prep/blob/main/${data.fileName.replace(/ /g, '%20')}" target="_blank" class="bg-teal-400 text-black font-bold px-6 py-2 rounded-lg hover:bg-teal-300 transition-all transform hover:scale-105 inline-block">
+                                        <i class="fab fa-github mr-2"></i> View Documentation
+                                    </a>
+                                    <button data-project-url="https://raw.githubusercontent.com/siva-ragavendra-kandula/AWS-Cloud-Practitioner-prep/main/${data.fileName.replace(/ /g, '%20')}" data-project-title="Day ${data.day}: ${data.title}" class="ask-ai-btn bg-cyan-400/20 text-cyan-300 font-semibold px-5 py-2 rounded-full hover:bg-cyan-400/30 transition-colors text-center">
+                                        ✨ Ask AI about project
+                                    </button>
+                                 </div>
+                            </div>
+                            <div class="flex-1 mt-6 md:mt-0">
+                                <a href="https://siva-ragavendra-kandula.github.io/AWS-Cloud-Practitioner-prep/${data.fileName}" target="_blank" class="block">
+                                    <h4 class="font-semibold mb-2 text-gray-300 hover:text-white transition-colors">Project Preview <i class="fas fa-external-link-alt text-xs ml-1"></i></h4>
+                                </a>
+                                <div id="project-preview" class="bg-black/50 border border-gray-700 rounded-lg h-48 lg:h-64 overflow-auto font-mono text-sm text-gray-400 relative">
+                                     <div class="absolute inset-0 flex items-center justify-center"><div class="loader"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    const previewContainer = document.getElementById('project-preview');
+                    
+                    // Stop main page scroll when scrolling over preview
+                    previewContainer.addEventListener('wheel', (event) => { event.stopPropagation(); });
+                    previewContainer.addEventListener('touchmove', (event) => { event.stopPropagation(); });
+                    
+                    try {
+                        const rawUrl = `https://raw.githubusercontent.com/siva-ragavendra-kandula/AWS-Cloud-Practitioner-prep/main/${data.fileName.replace(/ /g, '%20')}`;
+                        const response = await fetch(rawUrl);
+                        if (!response.ok) throw new Error(`File not found.`);
+                        const content = await response.text();
+                        
+                        if(data.fileName.endsWith('.html')) {
+                            previewContainer.innerHTML = `<iframe srcdoc="${content.replace(/"/g, '&quot;')}" class="w-full h-full border-0 bg-white"></iframe>`;
+                        } else {
+                            previewContainer.innerHTML = `<pre class="whitespace-pre-wrap p-4">${content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre>`;
+                        }
+                    } catch (error) {
+                        previewContainer.innerHTML = `<div class="text-red-400 p-4">${error.message}</div>`;
+                    }
+                }
+                stickyContentCard.classList.add('is-visible');
+            }
 
-  <a href="projects/day10-rds-simulator.html" class="card">
-    <h2>Day 10</h2>
-    <p>RDS Instance Configurator UI</p>
-  </a>
+            panels.forEach(panel => observer.observe(panel));
+            
+            mainNav.addEventListener('click', (e) => {
+                if(e.target.tagName === 'A' && e.target.dataset.targetId) {
+                    e.preventDefault();
+                    const targetId = e.target.dataset.targetId;
+                    const targetPanel = document.getElementById(targetId);
+                    if(targetPanel) {
+                        targetPanel.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
 
-  <a href="projects/day11-cloudwatch-dashboard.html" class="card">
-    <h2>Day 11</h2>
-    <p>CloudWatch Monitoring Dashboard (Simulated)</p>
-  </a>
+            stickyContentCard.addEventListener('click', async (e) => {
+                if (e.target.matches('.ask-ai-btn')) {
+                    const button = e.target;
+                    modalTitle.textContent = `Ask about: ${button.dataset.projectTitle}`;
+                    aiChatModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                    addMessageToChat('bot', 'Fetching project details...');
+                    try {
+                        const response = await fetch(button.dataset.projectUrl);
+                        if (!response.ok) throw new Error('Could not load project file.');
+                        projectContext = await response.text();
+                        addMessageToChat('bot', `Details for "${button.dataset.projectTitle}" are loaded. What would you like to know?`);
+                    } catch (error) {
+                        addMessageToChat('bot', `Sorry, I couldn't load the project details.`);
+                    }
+                }
 
-  <a href="projects/day12-iam-policy-simulator.html" class="card">
-    <h2>Day 12</h2>
-    <p>IAM Role & Policy Simulator</p>
-  </a>
+                if (e.target.matches('#suggest-steps-btn')) {
+                    const button = e.target;
+                    const spinner = document.getElementById('next-steps-spinner');
+                    const resultContainer = document.getElementById('next-steps-result');
+                    button.disabled = true;
+                    spinner.style.display = 'flex';
+                    resultContainer.classList.add('hidden');
+                    try {
+                        const suggestion = await callGeminiForNextSteps();
+                        resultContainer.innerHTML = suggestion;
+                        resultContainer.classList.remove('hidden');
+                    } catch (error) {
+                        resultContainer.innerHTML = `<p class="text-red-400">Error generating suggestions. Please try again.</p>`;
+                        resultContainer.classList.remove('hidden');
+                    } finally {
+                        button.disabled = false;
+                        spinner.style.display = 'none';
+                    }
+                }
+            });
 
-  <a href="projects/day13-cloudformation-visualizer.html" class="card">
-    <h2>Day 13</h2>
-    <p>CloudFormation Template Visual Tool</p>
-  </a>
+            closeModalBtn.addEventListener('click', () => {
+                aiChatModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+            
+            chatForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userMessage = chatInput.value.trim();
+                if (!userMessage) return;
+                addMessageToChat('user', userMessage);
+                chatInput.value = '';
+                toggleChatSpinner(true);
+                try {
+                    const aiResponse = await callGeminiForProject(userMessage, projectContext);
+                    addMessageToChat('bot', aiResponse);
+                } catch (error) {
+                    addMessageToChat('bot', 'Sorry, an error occurred.');
+                } finally {
+                    toggleChatSpinner(false);
+                }
+            });
 
-  <a href="projects/day14-billing-cost-explorer.html" class="card">
-    <h2>Day 14</h2>
-    <p>Billing & Cost Estimation Explorer</p>
-  </a>
+            function addMessageToChat(sender, message) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('p-3', 'rounded-lg', 'max-w-[85%]');
+                if (sender === 'user') {
+                    messageElement.classList.add('bg-cyan-500', 'text-white', 'self-end', 'ml-auto');
+                } else {
+                    messageElement.classList.add('bg-gray-700', 'text-gray-200', 'self-start', 'mr-auto');
+                }
+                messageElement.innerHTML = message.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                chatWindow.appendChild(messageElement);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            }
+            
+            function toggleChatSpinner(isLoading) {
+                const sendText = document.querySelector('.send-text');
+                const chatSpinner = document.querySelector('.chat-spinner');
+                sendText.style.display = isLoading ? 'none' : 'block';
+                chatSpinner.style.display = isLoading ? 'block' : 'none';
+                chatInput.disabled = isLoading;
+                chatForm.querySelector('button').disabled = isLoading;
+                if(!isLoading) chatInput.focus();
+            }
 
-  <a href="projects/day15-portfolio-final.html" class="card">
-    <h2>Day 15</h2>
-    <p>🌟 Final Portfolio Showcase (This Website!)</p>
-  </a>
+            const API_KEY = ""; // Keep this empty
+            async function callGemini(prompt, responseMimeType = "text/plain") {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                    ...(responseMimeType !== "text/plain" && { generationConfig: { "response_mime_type": responseMimeType } })
+                };
+                const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const result = await response.json();
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    return result.candidates[0].content.parts[0].text;
+                } else {
+                    console.error("Gemini API Error:", result);
+                    throw new Error("No valid response from Gemini API.");
+                }
+            }
 
-</main>
+            function callGeminiForProject(userQuestion, context) {
+                const prompt = `You are a helpful AI assistant. Explain a technical project based ONLY on the context provided. Speak in the first person, as if you are the student who did the project. Be concise. CONTEXT: --- ${context} --- QUESTION: ${userQuestion}`;
+                return callGemini(prompt);
+            }
+        
+            function callGeminiForNextSteps() {
+                const prompt = `I'm a cloud enthusiast who finished introductory AWS projects. Suggest three practical next steps for a cloud career. For each step, give a title, why it's a good next step, and a mini-project idea. Format as clean HTML for a dark-themed div. Use h3 for titles, p for descriptions. Example: <h3>Step 1: Learn X</h3><p>Why...</p><p><strong>Project:</strong> Build a...</p>`;
+                return callGemini(prompt, "text/html");
+            }
 
-<footer>
-  <p>© 2025 Siva Ragavendra Kandula | Built with ❤️ using HTML, CSS, and JavaScript</p>
-</footer>
-
+            updateContent(0);
+            navDots[0].classList.add('active');
+            backgroundElements[0].classList.add('active');
+        });
+    </script>
 </body>
 </html>
